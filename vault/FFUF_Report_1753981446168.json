@@ -1,0 +1,6 @@
+{
+  "title": "FFUF Report",
+  "tool": "ffuf",
+  "content": "🔥 **Severity: HIGH**\n\n### Vulnerability Report: Unintended File Disclosure\nSummary: An unauthenticated attacker can access sensitive files, including configuration and backup data, by exploiting unintended file disclosure.\nImpact: An attacker could potentially exfiltrate sensitive information, such as configuration settings, backup data, or even secrets, without needing credentials. This vulnerability poses a significant risk to the confidentiality, integrity, and availability of the affected system.\nSteps to Reproduce:\n1. Access the `/admin`, `/api/debug`, `/.env`, `internal/config.yaml`, and `/backup.sql` paths without authentication.\nProof of Concept (PoC):\n```\ncurl http://target.com/admin\ncurl http://target.com/api/debug\ncurl http://target.com/.env\ncurl http://target.com/internal/config.yaml\ncurl http://target.com/backup.sql\n```\nRecommended Fix:\nRestrict access to sensitive files and directories by implementing proper authentication, authorization, and access control mechanisms.\n**Severity rating: High**",
+  "timestamp": 1753981446168
+}
