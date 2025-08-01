@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { DownloadIcon, EyeIcon, Trash2Icon } from "lucide-react";
 import ReportModal from "./modals/ReportModal";
 import { format } from "date-fns";
@@ -22,6 +22,11 @@ export default function VaultTab({
   setItems: React.Dispatch<React.SetStateAction<VaultItem[]>>;
 }) {
   const [selected, setSelected] = useState<VaultItem | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleDelete = async (id: string) => {
     await fetch(`/api/vault?id=${id}`, { method: "DELETE" });
@@ -38,13 +43,15 @@ export default function VaultTab({
     URL.revokeObjectURL(url);
   };
 
-  // 🛠️ Pre-format timestamps to avoid hydration mismatch
   const formattedItems = useMemo(() => {
     return items.map((item) => ({
       ...item,
       formattedTime: format(item.timestamp, "M/dd/yyyy, h:mm:ss a"),
     }));
   }, [items]);
+
+  // 👇 SSR-safe: wait until mount
+  if (!mounted) return null;
 
   return (
     <div className="p-4 space-y-4">
