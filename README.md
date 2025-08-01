@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛠️ GEARZ Vuln Report Agent
 
-## Getting Started
+An AI-powered vulnerability report generator for bug bounty hunters. Paste your tool output (ffuf, nuclei, Burp, curl), and this app will generate a complete vulnerability report with severity, title, and suggestions — then save it to your private vault.
 
-First, run the development server:
+---
+
+## ⚡ Features
+
+- 🧠 AI-powered report generation (OpenAI or Ollama)
+- 🔐 Vault for saved reports (view, delete, export)
+- 📤 Export to `.md` or `.txt`
+- 🧾 Full report preview modal
+- 🕹️ Tailwind-powered hacker UI with fullscreen background
+- 💾 Fully offline-compatible with local Ollama model
+
+---
+
+## 🚀 Quickstart
+
+### 1. Clone the repo
 
 ```bash
+git clone https://github.com/Gearsoldier/gearz-vuln-report-agent.git
+cd gearz-vuln-report-agent
+
+2. Install dependencies
+bash
+Copy
+Edit
+npm install
+3. Set up your database
+bash
+Copy
+Edit
+npx prisma generate
+npx prisma migrate dev --name init
+🧠 Local AI with Ollama
+This app uses llama3 via Ollama by default. No API key required.
+
+✅ Step-by-step by OS:
+🔵 Windows
+Download Ollama: https://ollama.com/download
+
+Open PowerShell and run:
+
+bash
+Copy
+Edit
+ollama serve
+ollama pull llama3
+🍎 macOS
+bash
+Copy
+Edit
+brew install ollama
+ollama serve
+ollama pull llama3
+🐉 Kali Linux / Ubuntu
+bash
+Copy
+Edit
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve
+ollama pull llama3
+💡 You MUST keep ollama serve running in a terminal while using the app.
+
+💻 Running the App
+bash
+Copy
+Edit
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Then visit: http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🧪 How to Use
+🔧 Select Tool — Choose from ffuf, nuclei, burp, or curl
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+📋 Paste Output — Paste the tool’s output into the textarea
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🧠 Click Generate Report — AI will analyze the output and generate a report
 
-## Learn More
+💾 Saved to Vault — View, preview, export, or delete the report from your vault
 
-To learn more about Next.js, take a look at the following resources:
+🧾 Full View — Click View to open the full vulnerability report with severity
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📁 Vault Features
+🔒 Offline vault stored locally (can be extended for user login)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📥 Export reports as .md or .txt
 
-## Deploy on Vercel
+🗑️ Delete with a single click
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🔍 Full preview in modal with AI-assigned severity
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🛠️ Configuration
+If you want to use OpenAI instead of Ollama, modify the backend in:
+
+ts
+Copy
+Edit
+// app/api/report/route.ts
+// Replace Ollama endpoint with OpenAI API call
+🖼️ Background / Branding
+Background image: public/images/ops-center-bg.png
+
+Favicon and theme customization supported
+
+Fully Tailwind styled and responsive
+
+
+👑 Created by GEARZ
+Built for bug bounty hunters, red teamers, and AI enthusiasts.
+
+Follow, fork, and customize it — but give credit if you use it in your own product.
